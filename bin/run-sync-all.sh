@@ -6,7 +6,7 @@ if [ ! -e ./manage.py ]; then
     cd $script_parent_dir
 fi
 
-if [[ "$BRANCH_NAME" == "prod" ]]; then
+if [[ "$BRANCH_NAME" == "sqlitening-prod" ]]; then
     ENV_FILE=prod
 else
     ENV_FILE=master

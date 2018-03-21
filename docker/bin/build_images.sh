@@ -73,7 +73,7 @@ if $TEST_MODE && ! imageExists "test"; then
 fi
 
 if ! imageExists "l10n"; then
-    if [[ "$BRANCH_NAME" == "prod" ]]; then
+    if [[ "$BRANCH_NAME" == "sqlitening-prod" ]]; then
         ENVFILE="prod";
     else
         ENVFILE="master";
