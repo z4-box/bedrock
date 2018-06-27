@@ -53,7 +53,6 @@ def pushDockerhub(from_repo) {
 def integrationTestJob(propFileName, appURL='') {
     return {
         node {
-            unstash 'workspace'
             def testScript = "docker/bin/run_integration_tests.sh ${propFileName}".toString()
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
                               credentialsId: 'SAUCELABS_CREDENTIALS',
