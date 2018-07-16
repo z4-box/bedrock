@@ -77,6 +77,56 @@ def integrationTestJob(propFileName, appURL='') {
     }
 }
 
+def deploymentJob(config, region, appname, tested_apps) {
+    return {
+        node {
+            if ( config.demo ) {
+                appURL = utils.demoAppURL(appname, region)
+                namespace = 'bedrock-demo'
+            } else {
+                appURL = "https://${appname}.${region.name}.moz.works"
+                namespace = appname
+            }
+            stageName = "Deploy ${appname}-${region.name}"
+            // ensure no deploy/test cycle happens in parallel for an app/region
+            lock (stageName) {
+                milestone()
+                stage (stageName) {
+                    if ( region.deis_bin ) {
+                        utils.pushDeis(region, config, appname, stageName)
+                    } else if (region.config_repo){
+                        utils.deploy(region, config, appname, stageName, namespace)
+                    }
+                    utils.ircNotification([message: appURL, status: 'shipped'])
+                }
+                if ( config.integration_tests ) {
+                    // queue up test closures
+                    def allTests = [:]
+                    def regionTests = config.integration_tests[regionId]
+                    for (filename in regionTests) {
+                        allTests[filename] = utils.integrationTestJob(filename, appURL)
+                    }
+                    stage ("Test ${appname}-${region.name}") {
+                        try {
+                            // wait for server to be ready
+                            sleep(time: 10, unit: 'SECONDS')
+                            if ( allTests.size() == 1 ) {
+                                allTests[regionTests[0]]()
+                            } else {
+                                parallel allTests
+                            }
+                        } catch(err) {
+                            utils.ircNotification([stage: "Integration Tests ${appname}-${region.name}", status: 'failure'])
+                            throw err
+                        }
+                        tested_apps << "${appname}-${region.name}".toString()
+                    }
+                }
+            }
+        }
+    }
+}
+
 def pushDeis(region, config, appname, stageName) {
     withEnv(["DEIS_PROFILE=${region.name}",
             "DEIS_BIN=${region.deis_bin}",
