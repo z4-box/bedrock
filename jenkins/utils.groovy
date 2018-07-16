@@ -90,7 +90,6 @@ def deploymentJob(config, region, appname, tested_apps) {
             stageName = "Deploy ${appname}-${region.name}"
             // ensure no deploy/test cycle happens in parallel for an app/region
             lock (stageName) {
-                milestone()
                 stage (stageName) {
                     if ( region.deis_bin ) {
                         utils.pushDeis(region, config, appname, stageName)
