@@ -65,7 +65,6 @@ if ( config.push_public_registry != false ) {
 }
 
 if ( config.apps ) {
-    milestone()
     tested_apps = []
     // default to oregon-b only
     def regions = config.regions ?: ['oregon-b']
