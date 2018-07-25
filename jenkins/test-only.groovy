@@ -1,4 +1,4 @@
-milestone()
+sh "echo test: is this thing on?"
 
 utils.ircNotification([stage: 'Test', status: 'starting'])
 
