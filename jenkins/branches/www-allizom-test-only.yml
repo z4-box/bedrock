@@ -1,0 +1,11 @@
+# see the following for documentation of these options
+# http://bedrock.readthedocs.io/en/latest/pipeline.html#configuration
+regions:
+  - oregon-b
+apps:
+  - bedrock-stage
+app_url: https://www.allizom.org
+integration_tests:
+  - firefox
+pipeline:
+  script: test-only
