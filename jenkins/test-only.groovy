@@ -1,5 +1,3 @@
-sh "echo test: is this thing on?"
-
 utils.ircNotification([stage: 'Test', status: 'starting'])
 
 env.GIT_COMMIT = "latest"
@@ -17,6 +15,7 @@ if ( config.apps ) {
             allTests[filename] = utils.integrationTestJob(filename, appURL)
         }
         stage ("Test ${appURL}") {
+            stash 'workspace'
             try {
                 // wait for server to be ready
                 sleep(time: 10, unit: 'SECONDS')
