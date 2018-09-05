@@ -1,6 +1,20 @@
 #!groovy
 
-@Library('github.com/mozmeao/jenkins-pipeline@20170315.1')
+
+def setConfigEnvironmentVariables(LinkedHashMap config=null) {
+  if (config == null) {
+    try {
+      config = readYaml file: 'jenkins.yml'
+    }
+    catch (e) {
+      println "Environment variables skipped. Configuration not found."
+      return
+    }
+  }
+  for (var in config.environment) {
+    env[var.key] = var.value
+  }
+}
 
 def loadBranch(String branch) {
     // load the utility functions used below
@@ -34,8 +48,6 @@ def loadBranch(String branch) {
 
     // load the global config
     global_config = readYaml file: 'jenkins/global.yml'
-    // defined in the Library loaded above
-    setGitEnvironmentVariables()
     setConfigEnvironmentVariables(global_config)
 
     if ( config.pipeline && config.pipeline.script ) {
