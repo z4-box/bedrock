@@ -7,6 +7,7 @@ env.GIT_COMMIT = "latest"
 if ( config.apps ) {
     milestone()
     tested_apps = []
+    stash 'workspace' // needed by utils.integrationTestJob below
     // default to oregon-b only
     def regions = config.regions ?: ['oregon-b']
     for (regionId in regions) {

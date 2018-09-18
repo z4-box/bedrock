@@ -59,7 +59,7 @@ def integrationTestJob(propFileName, appURL='') {
                               credentialsId: 'SAUCELABS_CREDENTIALS',
                               usernameVariable: 'SAUCELABS_USERNAME',
                               passwordVariable: 'SAUCELABS_API_KEY']]) {
-                withEnv(["BASE_URL=${appURL}"]) {
+                withEnv(["BASE_URL=${appURL}", "GIT_COMMIT=latest"]) {
                     retry(2) {
                         try {
                             sh testScript
