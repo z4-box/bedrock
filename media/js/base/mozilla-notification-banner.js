@@ -149,7 +149,7 @@ if (typeof Mozilla === 'undefined') {
 
         _container.className = 'notification-banner';
         _content.className = 'content';
-        _contentContainer.className = 'content-container';
+        _contentContainer.className = 'content-container visible';
         _heading.innerHTML = options.heading;
         _message.innerHTML = options.message;
 
