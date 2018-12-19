@@ -20,7 +20,11 @@
 {% endblock %}
 
 {% block site_footer %}
-  {% include 'includes/protocol/site-footer.html' %}
+  {% if LANG.startswith('en-') %}
+    {% include 'includes/protocol/site-footer-en.html' %}
+  {% else %}
+    {% include 'includes/protocol/site-footer.html' %}
+  {% endif %}
 {% endblock %}
 
 {% block site_js %}
