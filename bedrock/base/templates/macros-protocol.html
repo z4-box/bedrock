@@ -99,6 +99,8 @@
 <section class="mzp-c-card {% if class %}{{ class }}{% endif %} {% if aspect_ratio %}{{ aspect_ratio }}{% endif %} {% if media_icon %}{{ media_icon }}{% endif %} {% if youtube_id %}has-video-embed{% endif %}">
   <a class="mzp-c-card-block-link" href="{{ link_url }}" data-link-name="{{ ga_title }}" data-link-type="link" data-link-group="card">
     <div class="mzp-c-card-media-wrapper">
+      {# The highres_image_url parameter is for passing in a full URL to a highres image. #}
+      {# While the include_highres_image is for allowing the lazy_img helper to figure out the name of the highres version. #}
       {% if highres_image_url %}
         {{ lazy_img(image_url=image_url, highres_image_url=highres_image_url, placeholder_url='placeholder.png', optional_attributes={'class': 'mzp-c-card-image'}) }}
       {% else %}
