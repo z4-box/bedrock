@@ -85,11 +85,13 @@ class ContentCard(models.Model):
         data = {}
         data.update(self.data)
         if 'image' in data:
-            data['image_url'] = '%scontentcards/img/%s' % (settings.STATIC_URL, data['image'])
+            data['image_url'] = '%scontentcards/img/%s' % (settings.CONTENT_CARDS_URL,
+                                                           data['image'])
             del data['image']
 
         if 'highres_image' in data:
-            data['highres_image_url'] = '%scontentcards/img/%s' % (settings.STATIC_URL, data['highres_image'])
+            data['highres_image_url'] = '%scontentcards/img/%s' % (settings.CONTENT_CARDS_URL,
+                                                                   data['highres_image'])
             del data['highres_image']
 
         if 'ga_title' not in data:
