@@ -15,7 +15,7 @@ from django.views.generic import TemplateView
 from commonware.decorators import xframe_allow
 
 from bedrock.base.waffle import switch
-from bedrock.contentcards.templatetags.helpers import get_page_content_cards
+from bedrock.contentcards.models import get_page_content_cards
 from bedrock.mozorg.credits import CreditsFile
 from bedrock.mozorg.forums import ForumsFile
 from bedrock.mozorg.models import ContributorActivity, TwitterCache

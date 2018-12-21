@@ -14,6 +14,10 @@ from bedrock.base.urlresolvers import reverse
 URL_RE = re.compile(r'^https?://', re.I)
 
 
+def get_page_content_cards(page_name, locale):
+    return ContentCard.objects.get_page_cards(page_name, locale)
+
+
 def get_data_from_file_path(file_path):
     card_name, locale = file_path.stem.split('.')
     page_name = file_path.parts[-2]
