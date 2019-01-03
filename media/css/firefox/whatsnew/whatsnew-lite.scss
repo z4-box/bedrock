@@ -73,7 +73,7 @@
 }
 
 .lite-body {
-    background: url('/media/img/firefox/whatsnew/lite/background-swoosh.png') no-repeat top, linear-gradient(#4dd3e2, #3393f8);
+    background: url('/media/img/firefox/whatsnew/lite/background-swoosh.png') no-repeat bottom, linear-gradient(#00e4ff, #3aa1ff, #0484ff);
     color: #fff;
     overflow: hidden;
     position: relative;
@@ -157,6 +157,14 @@
 .has-send-to-device {
     .firefox-container > .mzp-l-content {
         max-width: $content-md + $layout-xl;
+    }
+}
+
+// Custom widget styles
+
+.mzp-c-sendyourself-field {
+    input[type="text"] {
+        border: 1px solid #fff;
     }
 }
 
