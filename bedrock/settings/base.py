@@ -1365,9 +1365,11 @@ RAVEN_CONFIG = {
 }
 
 # Django-CSP
-CSP_DEFAULT_SRC = config('CSP_DEFAULT_SRC', parser=ListOf(str),
-                         default="'self',*.mozilla.net,*.mozilla.org,*.mozilla.com"
-)
+CSP_DEFAULT_SRC = ["'self'", '*.mozilla.net', '*.mozilla.org', '*.mozilla.com']
+EXTRA_CSP_DEFAULT_SRC = config('CSP_DEFAULT_SRC', parser=ListOf(str), default='')
+if EXTRA_CSP_DEFAULT_SRC:
+    CSP_DEFAULT_SRC += EXTRA_CSP_DEFAULT_SRC
+
 CSP_IMG_SRC = CSP_DEFAULT_SRC + [
     'data:',
     'mozilla.org',
