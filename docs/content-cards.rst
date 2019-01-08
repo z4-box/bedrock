@@ -41,6 +41,10 @@ variable is available in the template, then the ``content_card()`` macro will di
     be used for all of them. You'd need to do something like ``if locale.startswith('en-'):`` then use
     ``en-US`` in the function call.
 
+    Alternately you could just wrap the section of the template using cards to be optional in an
+    ``{% if page_content_cards %}`` statement, and that way it will not show the section at all if the
+    dict is empty if there are no cards for that page and locale combination.
+
 Add to the Template
 -------------------
 
